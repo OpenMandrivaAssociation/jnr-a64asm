@@ -19,12 +19,15 @@ Pure Java assembler for AArch64, used by jnr-ffi.
 
 %prep
 %setup -q -n jnr-a64asm-jnr-a64asm-%{version}
+# oss-parent 7 is a publishing parent. This project already has its license
+# and compiler settings, and that parent POM is not installed.
 # Javadoc is not packaged, and this plugin release does not run on the current JDK.
 python - <<'PY'
 import re
 from pathlib import Path
 path = Path("pom.xml")
 text = path.read_text()
+text = re.sub(r"\s*<parent>.*?</parent>", "", text, count=1, flags=re.S)
 text = re.sub(
 	r"\s*<plugin>\s*<groupId>org\.apache\.maven\.plugins</groupId>\s*<artifactId>maven-javadoc-plugin</artifactId>.*?</plugin>",
 	"",
