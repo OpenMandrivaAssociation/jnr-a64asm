@@ -9,6 +9,9 @@ Source0:	https://github.com/jnr/jnr-a64asm/archive/refs/tags/jnr-a64asm-%{versio
 
 BuildArch:	noarch
 BuildRequires:	python
+# Literal, so the first rpmbuild -bs records them before sysjar is installed.
+BuildRequires:	maven
+BuildRequires:	java-current-devel
 BuildSystem:	maven
 
 %description
